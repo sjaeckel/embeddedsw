@@ -69,6 +69,7 @@ proc xgen_opts_file {libhandle} {
 	set hw_processor [common::get_property HW_INSTANCE $proc_instance]
 
 	set proc_type [common::get_property IP_NAME [hsi::get_cells -hier $hw_processor]];
+	set device_with_gpio [common::get_property CONFIG.device_with_gpio $libhandle]
 
 	set file_handle [::hsi::utils::open_include_file "xparameters.h"]
 
@@ -85,6 +86,20 @@ proc xgen_opts_file {libhandle} {
 		if {$mb_type == "kintexu" || $mb_type == "virtexu"} {
 			puts $file_handle "\n#define XPAR_XSK_MICROBLAZE_ULTRA 1"
 		}
+	}
+
+	if {$device_with_gpio == false} {
+		file delete -force ./src/xilskey_epl.c
+		file delete -force ./src/xilskey_js.h
+		file delete -force ./src/xilskey_jscmd.c
+		file delete -force ./src/xilskey_jscmd.h
+		file delete -force ./src/xilskey_jslib.c
+		file delete -force ./src/xilskey_jslib.h
+		file delete -force ./src/xilskey_jtag.h
+		file delete -force ./src/xilskey_bbram.c
+		file delete -force ./src/xilskey_bbramps_zynqmp.c
+		file delete -force ./src/include/xilskey_bbram.h
+		file delete -force ./src/include/xilskey_epl.h
 	}
 
 	if {$proc_type == "psu_pmu"} {

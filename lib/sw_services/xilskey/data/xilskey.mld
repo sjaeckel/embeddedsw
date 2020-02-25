@@ -57,6 +57,7 @@ BEGIN LIBRARY xilskey
   OPTION REQUIRES_OS = (standalone freertos10_xilinx);
   OPTION APP_LINKER_FLAGS = "-Wl,--start-group,-lxilskey,-lxil,-lgcc,-lc,--end-group";
   OPTION desc = "Xilinx Secure Key Library supports programming efuse and bbram ";
-  OPTION VERSION = 6.6;
+  OPTION VERSION = 6.66;
   OPTION NAME = xilskey;
+  PARAM name = device_with_gpio, desc = "Allows to build a subset of the library when there's no GPIO driver available", type = bool, default = true;
 END LIBRARY

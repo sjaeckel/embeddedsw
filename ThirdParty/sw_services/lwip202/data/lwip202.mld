@@ -156,6 +156,14 @@ BEGIN LIBRARY lwip202
 	PARAM name = dhcp_does_arp_check, desc = "ARP check on offered addresses?", type = bool, default = false;
   END CATEGORY
 
+  BEGIN CATEGORY dns_options
+	PROPERTY desc = "lwIP DNS options";
+	PARAM name = dns_options, desc = "Is DNS required?", type = bool, default = true, permit = none;
+	PARAM name = lwip_dns, desc = "Is DNS required?", type = bool, default = false;
+	PARAM name = dns_local_hostlist, desc = "Enable local host-list?", type = bool, default = false;
+	PARAM name = dns_local_hostlist_dynamic, desc = "Make local host-list dynamic?", type = bool, default = false;
+  END CATEGORY
+
   BEGIN CATEGORY stats_options
 	PARAM name = stats_options, desc = "Turn on lwIP statistics?", type = bool, default = true, permit = none;
 	PARAM name = lwip_stats, desc = "Turn on lwIP statistics?", type = bool, default = false;
@@ -172,6 +180,7 @@ BEGIN LIBRARY lwip202
 	PARAM name = netif_debug, desc = "Debug network interface layer", type = bool, default = false;
 	PARAM name = sys_debug, desc = "Debug sys arch layer", type = bool, default = false;
 	PARAM name = pbuf_debug, desc = "Debug pbuf layer", type = bool, default = false;
+	PARAM name = dns_debug, desc = "Debug DNS protocol", type = bool, default = false;
   END CATEGORY
 
 END LIBRARY

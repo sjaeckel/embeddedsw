@@ -859,6 +859,16 @@ proc generate_lwip_opts {libhandle} {
 	puts $lwipopts_fd ""
 
 
+	# DNS options
+	set lwip_dns 		[expr [common::get_property CONFIG.lwip_dns $libhandle] == true]
+	set dns_local_hostlist [expr [common::get_property CONFIG.dns_local_hostlist $libhandle] == true]
+	set dns_local_hostlist_dynamic [expr [common::get_property CONFIG.dns_local_hostlist_dynamic $libhandle] == true]
+	puts $lwipopts_fd "\#define LWIP_DNS $lwip_dns"
+	puts $lwipopts_fd "\#define DNS_LOCAL_HOSTLIST $dns_local_hostlist"
+	puts $lwipopts_fd "\#define DNS_LOCAL_HOSTLIST_IS_DYNAMIC $dns_local_hostlist_dynamic"
+	puts $lwipopts_fd ""
+
+
 	# temac adapter options
 	set linkspeed [common::get_property CONFIG.phy_link_speed $libhandle]
 	puts $lwipopts_fd "\#define $linkspeed 1"
@@ -882,6 +892,7 @@ proc generate_lwip_opts {libhandle} {
 	set netif_debug		[expr [common::get_property CONFIG.netif_debug $libhandle] == true]
 	set sys_debug		[expr [common::get_property CONFIG.sys_debug $libhandle] == true]
 	set pbuf_debug		[expr [common::get_property CONFIG.pbuf_debug $libhandle] == true]
+	set dns_debug		[expr [common::get_property CONFIG.dns_debug $libhandle] == true]
 
 	if {$lwip_debug == 1} {
 		puts $lwipopts_fd "\#define LWIP_DEBUG 1"
@@ -898,6 +909,7 @@ proc generate_lwip_opts {libhandle} {
 		if {$icmp_debug} { puts $lwipopts_fd "\#define ICMP_DEBUG (LWIP_DBG_LEVEL_SEVERE | LWIP_DBG_ON)" }
 		if {$igmp_debug} { puts $lwipopts_fd "\#define IGMP_DEBUG (LWIP_DBG_LEVEL_SEVERE | LWIP_DBG_ON)" }
 		if {$netif_debug} { puts $lwipopts_fd "\#define NETIF_DEBUG (LWIP_DBG_LEVEL_SEVERE | LWIP_DBG_ON)" }
+		if {$dns_debug} { puts $lwipopts_fd "\#define DNS_DEBUG (LWIP_DBG_LEVEL_SEVERE | LWIP_DBG_ON)" }
 		if {$sys_debug} {
 			puts $lwipopts_fd "\#define SYS_DEBUG (LWIP_DBG_LEVEL_SEVERE | LWIP_DBG_ON)"
 			puts $lwipopts_fd "\#define API_MSG_DEBUG (LWIP_DBG_LEVEL_SEVERE | LWIP_DBG_ON)"

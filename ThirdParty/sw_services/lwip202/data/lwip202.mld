@@ -164,6 +164,11 @@ BEGIN LIBRARY lwip202
 	PARAM name = dns_local_hostlist_dynamic, desc = "Make local host-list dynamic?", type = bool, default = false;
   END CATEGORY
 
+  BEGIN CATEGORY socket_options
+	PARAM name = socket_options, desc = "Socket options", type = bool, default = true, permit = none;
+	PARAM name = so_reuse, desc = "Enable SO_REUSE?", type = bool, default = false;
+  END CATEGORY
+
   BEGIN CATEGORY stats_options
 	PARAM name = stats_options, desc = "Turn on lwIP statistics?", type = bool, default = true, permit = none;
 	PARAM name = lwip_stats, desc = "Turn on lwIP statistics?", type = bool, default = false;

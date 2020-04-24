@@ -582,6 +582,11 @@ proc generate_lwip_opts {libhandle} {
 			}
 			puts $lwipopts_fd ""
 		}
+		set so_reuse	[common::get_property CONFIG.so_reuse $libhandle]
+		if {$so_reuse == true} {
+			puts $lwipopts_fd "\#define SO_REUSE 1"
+		}
+		puts $lwipopts_fd ""
 	}
 
 	set use_axieth_on_zynq [common::get_property CONFIG.use_axieth_on_zynq $libhandle]
